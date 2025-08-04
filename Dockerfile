@@ -54,6 +54,15 @@ ENV PORT 3000
 # set hostname to localhost
 ENV HOSTNAME "0.0.0.0"
 
+# Environment Variables for the application
+
+ENV STRIPE_SECRET_KEY=sk_test_51RjdNmFQHy0umtP4Ab4SByRGugeIXNI4kwJP0KZ1CspTWMlEUWKuSNzr10Gig5F8s5Qc6M0H1sZq4XhddYz8ikJS00KqcBuOis
+ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51RjdNmFQHy0umtP4AlXx2sc8uInGhWXgH6ij91Hvd5lYD61oKwmMGowY8kkYwuJT2coDwYVpaLVcqy0SSfpYnUaI00edDmornC
+ENV STRIPE_WEBHOOK_SECRET=whsec_FMMOM00XortTAAEcdbWvaS7cFuONMU7O
+ENV NEXT_PUBLIC_BASE_API=https://uapi.rg.in.th/uapi/rantcar/
+ENV NEXT_PUBLIC_BASE_URL=http://vanko.rg.in.th
+ENV RESEND_API_KEY=re_YNWxh6cj_LVG9RrkUmBjXCvtCb2NZxS5k
+
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 CMD ["node", "server.js"] 
