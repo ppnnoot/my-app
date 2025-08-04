@@ -229,12 +229,16 @@ export default function BookingPage() {
       
       // Load Stripe
       console.log('🔌 Loading Stripe...');
-      const stripe = await getStripeJs();
-      console.log('✅ Stripe loaded:', stripe);
+      // const stripe = await getStripeJs();
+      // console.log('✅ Stripe loaded:', stripe);
       
       // Redirect to Stripe Checkout
       console.log('🔄 Redirecting to Stripe Checkout...');
-      const { error } = await stripe.redirectToCheckout({ sessionId });
+
+      // const { error } = await stripe.redirectToCheckout({ sessionId });
+      const error = null;
+      const url = responseData.url;
+      window.location.href = url;
       
       if (error) {
         console.error('❌ Stripe redirect error:', error);
@@ -253,7 +257,17 @@ export default function BookingPage() {
   // Load Stripe.js
   const getStripeJs = async () => {
     const { loadStripe } = await import('@stripe/stripe-js');
-    return loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    
+    // Check if Stripe key is available
+    const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+    
+    if (!stripeKey) {
+      console.error('❌ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not defined');
+      throw new Error('Stripe configuration is missing. Please check your environment variables.');
+    }
+    
+    console.log('🔑 Stripe key found:', stripeKey.substring(0, 20) + '...');
+    return loadStripe(stripeKey);
   };
 
   const selectedService = services.find(s => s.id === bookingData.service);
